@@ -3,6 +3,9 @@
 // Database Configuration
 // ============================================
 
+// Set timezone ke WIB (UTC+7) — penting agar waktu ujian sesuai
+date_default_timezone_set('Asia/Jakarta');
+
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'cbt_db');
 define('DB_USER', 'root');

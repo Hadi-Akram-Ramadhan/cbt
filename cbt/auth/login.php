@@ -52,7 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         body { font-family: 'Inter', sans-serif; }
         .bg-login { background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #2563eb 100%); }
         .card-glass { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); }
-        .input-field { @apply w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all; }
+        .input-field { width:100%; padding:0.75rem 1rem 0.75rem 2.5rem; border:1px solid #d1d5db; border-radius:0.75rem; font-size:0.875rem; outline:none; transition:all 0.15s; background:white; }
+        .input-field:focus { box-shadow:0 0 0 2px #3b82f6; border-color:transparent; }
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
         .float { animation: float 3s ease-in-out infinite; }
     </style>

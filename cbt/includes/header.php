@@ -1,7 +1,7 @@
 <?php
 // Base URL — adjust if project is in a subfolder
-define('BASE_URL', '/brainstorm/cbt');
-define('APP_NAME', 'CBT Online');
+if (!defined('BASE_URL')) define('BASE_URL', '/brainstorm/cbt');
+if (!defined('APP_NAME')) define('APP_NAME', 'CBT Online');
 
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../config/auth.php';
@@ -82,15 +82,15 @@ $currentPath = $_SERVER['PHP_SELF'];
             <?php if ($currentUser['role'] === 'admin'): ?>
                 <?php
                 $adminLinks = [
-                    ['icon'=>'fa-chart-pie',     'label'=>'Dashboard',     'href'=> BASE_URL.'/admin/dashboard.php'],
-                    ['icon'=>'fa-users',          'label'=>'Siswa',         'href'=> BASE_URL.'/admin/students/index.php'],
-                    ['icon'=>'fa-file-alt',       'label'=>'Ujian',         'href'=> BASE_URL.'/admin/exams/index.php'],
-                    ['icon'=>'fa-question-circle','label'=>'Soal',          'href'=> BASE_URL.'/admin/questions/index.php'],
-                    ['icon'=>'fa-upload',         'label'=>'Import Soal',   'href'=> BASE_URL.'/admin/import.php'],
-                    ['icon'=>'fa-chart-bar',      'label'=>'Nilai & Hasil', 'href'=> BASE_URL.'/admin/results/index.php'],
+                    ['icon'=>'fa-chart-pie',     'label'=>'Dashboard',     'href'=> BASE_URL.'/admin/dashboard.php',        'match'=>'/admin/dashboard'],
+                    ['icon'=>'fa-users',          'label'=>'Siswa',         'href'=> BASE_URL.'/admin/students/index.php',   'match'=>'/admin/students'],
+                    ['icon'=>'fa-file-alt',       'label'=>'Ujian',         'href'=> BASE_URL.'/admin/exams/index.php',      'match'=>'/admin/exams'],
+                    ['icon'=>'fa-question-circle','label'=>'Soal',          'href'=> BASE_URL.'/admin/questions/index.php',  'match'=>'/admin/questions'],
+                    ['icon'=>'fa-upload',         'label'=>'Import Soal',   'href'=> BASE_URL.'/admin/import.php',           'match'=>'/admin/import'],
+                    ['icon'=>'fa-chart-bar',      'label'=>'Nilai & Hasil', 'href'=> BASE_URL.'/admin/results/index.php',    'match'=>'/admin/results'],
                 ];
                 foreach ($adminLinks as $link):
-                    $active = strpos($currentPath, basename($link['href'])) !== false ? 'bg-brand-700' : 'hover:bg-brand-800';
+                    $active = strpos($currentPath, $link['match']) !== false ? 'bg-brand-700' : 'hover:bg-brand-800';
                 ?>
                 <a href="<?= $link['href'] ?>" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-brand-100 transition-all <?= $active ?>">
                     <i class="fas <?= $link['icon'] ?> w-5 text-center text-brand-300"></i>
@@ -100,11 +100,11 @@ $currentPath = $_SERVER['PHP_SELF'];
             <?php else: ?>
                 <?php
                 $siswaLinks = [
-                    ['icon'=>'fa-home',      'label'=>'Dashboard',  'href'=> BASE_URL.'/user/dashboard.php'],
-                    ['icon'=>'fa-clipboard-list','label'=>'Ujian Saya','href'=> BASE_URL.'/user/dashboard.php'],
+                    ['icon'=>'fa-home',           'label'=>'Dashboard',   'href'=> BASE_URL.'/user/dashboard.php', 'match'=>'/user/dashboard'],
+                    ['icon'=>'fa-clipboard-list', 'label'=>'Ujian Saya',  'href'=> BASE_URL.'/user/dashboard.php', 'match'=>'/user/exam'],
                 ];
                 foreach ($siswaLinks as $link):
-                    $active = strpos($currentPath, basename($link['href'])) !== false ? 'bg-brand-700' : 'hover:bg-brand-800';
+                    $active = strpos($currentPath, $link['match']) !== false ? 'bg-brand-700' : 'hover:bg-brand-800';
                 ?>
                 <a href="<?= $link['href'] ?>" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-brand-100 transition-all <?= $active ?>">
                     <i class="fas <?= $link['icon'] ?> w-5 text-center text-brand-300"></i>
